@@ -6,9 +6,9 @@
 
 
 
-##### Installation de mainsail
+##### Installing Mainsail
 
-// extrait du [README_en](https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/blob/main/mainsail/README_en) de [https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/tree/main/mainsail](https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/tree/main/mainsail)
+// excerpt from the [README_en](https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/blob/main/mainsail/README_en) of [https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/tree/main/mainsail](https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/tree/main/mainsail)
 
 <pre>
 mainsail version v2.7.1
@@ -31,7 +31,7 @@ IP with 4409 port
 eg, 192.168.1.1:4409
 </pre>
 
-Donc aprés avoir récupérer et copier le contenue du dossier https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/tree/main/mainsail/mainsail dans un dossier `mainsail` sur une clé USB et avoir connecté la clé USB a l'ecran NebulaPad
+So after retrieving and copying the contents of the folder https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/tree/main/mainsail/mainsail into a `mainsail` folder on a USB drive and connecting the USB drive to the NebulaPad screen
 
 <pre>
 md5sum /tmp/udisk/sda1/mainsail/*
@@ -39,17 +39,17 @@ md5sum /tmp/udisk/sda1/mainsail/*
 105e1215ba1c5dc6fa824fe33878faa2  /tmp/udisk/sda1/mainsail/mainsail.tar
 </pre>
 
-copie des fichiers
+copy the files
 ~~~
 cp /tmp/udisk/sda1/mainsail/* /usr/data/
 ~~~
 
-execution du script d'installation
+run the installation script
 ~~~
 /usr/data/mainsail.sh install
 ~~~
 
-pour plus tard désinstaller
+to uninstall later
 ~~~
 /usr/data/fluidd.sh unstall
 ~~~
