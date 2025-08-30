@@ -1,14 +1,14 @@
-Moonraker est une interface/API qui permetra a d'autre interface web ( comme fluidd ou mainsail ) de communiquer avec Klipper/Klippy.
+Moonraker is an interface/API that allows other web interfaces (such as Fluidd or Mainsail) to communicate with Klipper/Klippy.
 
-Le plus simple c'est de passer par le Script d'aide a l'installation pour les K1 de Guilouz https://github.com/Guilouz/Creality-K1-and-K1-Max/
+The easiest way is to use the installation helper script for the K1 by Guilouz https://github.com/Guilouz/Creality-K1-and-K1-Max/
 
 ---
 
 
-Mes notes en vrac pour eventuellement le faire sans l'aide du script de Guilouz 
+My miscellaneous notes in case I eventually do it without Guilouz's script
 
 
-extrait de https://github.com/Guilouz/Creality-K1-and-K1-Max/blob/main/Scripts/installer.sh
+excerpt from https://github.com/Guilouz/Creality-K1-and-K1-Max/blob/main/Scripts/installer.sh
 <pre>
 download_URL="https://raw.githubusercontent.com/Guilouz/Creality-K1-and-K1-Max/main/Scripts/files/"
 
@@ -25,6 +25,3 @@ wget --no-check-certificate https://raw.githubusercontent.com/Guilouz/Creality-K
 
 tar -C /usr/data/moonraker -xvf /usr/data/moonraker.tar
 ~~~
-
-
-
