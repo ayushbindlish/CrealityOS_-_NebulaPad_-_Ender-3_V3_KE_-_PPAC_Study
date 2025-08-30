@@ -181,17 +181,17 @@ start_server(){
     clean_old_logs
 
     export HOME=/root
-    # sleep 2s # 应用进程延时启动，等待marlin先启动完成
+    # sleep 2s # Delay application process start, wait for Marlin to start first
     sync && echo 3 > /proc/sys/vm/drop_caches
     [ -x "$BIN_PATH/$MASTER_SERVER" ] && $BIN_PATH/$MASTER_SERVER &
-    # sleep 2s # 主动进程启动后延时，等待获取marlin状态完成
+    # sleep 2s # Delay after starting main process, wait to retrieve Marlin status
     [ -x "$BIN_PATH/$AUDIO_SERVER" ] && $BIN_PATH/$AUDIO_SERVER &
     [ -x "$BIN_PATH/$WIFI_SERVER" ] && $BIN_PATH/$WIFI_SERVER &
     [ -x "$BIN_PATH/$APP_SERVER" ] && $BIN_PATH/$APP_SERVER &
     [ -x "$BIN_PATH/$DISPLAY_SERVER" ] && $BIN_PATH/$DISPLAY_SERVER &
     [ -x "$BIN_PATH/$UPGRADE_SERVER" ] && $BIN_PATH/$UPGRADE_SERVER &
     [ -x "$BIN_PATH/$WEB_SERVER" ] && $BIN_PATH/$WEB_SERVER &
-    # 守护进程排在最后启动
+    # Start the daemon process last
     [ -x "$BIN_PATH/$MONITOR" ] && $BIN_PATH/$MONITOR &
 }
 
