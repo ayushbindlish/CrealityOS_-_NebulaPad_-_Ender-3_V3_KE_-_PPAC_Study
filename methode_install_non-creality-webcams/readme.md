@@ -1,27 +1,27 @@
 
-Pour une version de ce tutoriel avec des captures d'ecrans (mais avec moins de résulats de commandes)  
+For a version of this tutorial with screenshots (but with fewer command results)
 [https://www.lesimprimantes3d.fr/tutoriel-installer-webcam-logitech-creality-ender-3-v3-ke-20240209/](https://www.lesimprimantes3d.fr/tutoriel-installer-webcam-logitech-creality-ender-3-v3-ke-20240209/)
 
 
-2024-03-11 **Depuis la publication de ce tutoriel Guilouz a fait quelque changements. J'ai normalement adapté ici les liens et commandes qui ont changés**
+2024-03-11 **Since the publication of this tutorial, Guilouz has made some changes. I have updated here the links and commands that have changed**
 
 
-Pré-requis
-- firmware v1.1.0.12 mode root activé
-- commande `opkg` fourni par Entware installable via le "[Helper Script Installation](https://guilouz.github.io/Creality-K1-Series/helper-script/helper-script-installation/)" de Guilouz ( cf  [https://guilouz.github.io/Creality-K1-Series/helper-script/entware/](https://guilouz.github.io/Creality-K1-Series/helper-script/entware/) )
+Prerequisites
+- firmware v1.1.0.12 with root mode enabled
+- `opkg` command provided by Entware, installable via Guilouz's "[Helper Script Installation](https://guilouz.github.io/Creality-K1-Series/helper-script/helper-script-installation/)" (see  [https://guilouz.github.io/Creality-K1-Series/helper-script/entware/](https://guilouz.github.io/Creality-K1-Series/helper-script/entware/) )
 ~~~
 git clone https://github.com/Guilouz/Creality-Helper-Script.git /usr/data/helper-script
 sh /usr/data/helper-script/helper.sh
 ~~~
-Après avoir installé Entware, il faut  
-soit exécuter la commande
+After installing Entware, you must
+either run the command
 ~~~
 export PATH="/opt/bin:/opt/sbin:$PATH"
 ~~~
-soit se déconnecter et ré-ouvrir une connexion ssh (pour que la variable d'environnement PATH soit a jour car l'installation a placé un /etc/profile.d/entware.sh qui est automatiquement exécuté a l'ouverture d'une session.)
+or disconnect and reopen an ssh connection (so that the PATH environment variable is up to date because the installation placed a /etc/profile.d/entware.sh that is automatically executed when a session starts.)
 
 <details>
- <summary>Résultat de la commande sur ma machine (Cliquez pour déplier!)</summary>
+ <summary>Command output on my machine (Click to expand!)</summary>
 <pre>
 root@F005-4A88 /root [#] opkg
 -sh: opkg: not found
@@ -63,12 +63,12 @@ root@F005-4A88 /root [#]
 
 ---
 
-Utiliser `opkg` (fourni par Entware) pour installer les paquets suivants
+Use `opkg` (provided by Entware) to install the following packages
 ~~~
 opkg install mjpg-streamer
 ~~~
 <details>
- <summary>Résultat de la commande sur ma machine (Cliquez pour déplier!)</summary>
+ <summary>Command output on my machine (Click to expand!)</summary>
 <pre>
 root@F005-4A88 /root [#] opkg install mjpg-streamer
 Installing mjpg-streamer (1.0.0-6) to root...
@@ -91,9 +91,9 @@ root@F005-4A88 /root [#]
 opkg install mjpg-streamer-input-uvc
 ~~~
 <details>
- <summary>Résultat de la commande sur ma machine (Cliquez pour déplier!)</summary>
+ <summary>Command output on my machine (Click to expand!)</summary>
 <pre>
-// A FAIRE
+// TODO
 </pre>
 </details>
 
@@ -101,7 +101,7 @@ opkg install mjpg-streamer-input-uvc
 opkg install mjpg-streamer-output-http
 ~~~
 <details>
- <summary>Résultat de la commande sur ma machine (Cliquez pour déplier!)</summary>
+ <summary>Command output on my machine (Click to expand!)</summary>
 <pre>
 root@F005-4A88 /root [#] opkg install mjpg-streamer-output-http
 Installing mjpg-streamer-output-http (1.0.0-6) to root...
@@ -111,7 +111,7 @@ root@F005-4A88 /root [#]
 </pre>
 </details>
 
-Vérifier que votre Webcam se trouve bien connectée (Ici, j'ai une Logitech C170)
+Check that your webcam is properly connected (Here, I have a Logitech C170)
 ~~~
 lsusb
 ~~~
@@ -124,12 +124,12 @@ root@F005-4A88 /root [#]
 </pre>
 
 
-Vérifier que v4l (video for linux) trouve alors un périphérique vidéo
+Check that v4l (Video for Linux) then finds a video device
 ~~~
 v4l2-ctl --list-devices
 ~~~
 <details>
- <summary>Résultat de la commande sur ma machine (Cliquez pour déplier!)</summary>
+ <summary>Command output on my machine (Click to expand!)</summary>
 <pre>
 root@F005-4A88 /root [#] v4l2-ctl --list-devices
 jz-rot ():
@@ -154,22 +154,22 @@ root@F005-4A88 /root [#]
 </pre>
 </details>
 
-Pour n'avoir que le/les périphériques vidéos dont on a besoin ici
+To get only the video device(s) we need here
 ~~~
 v4l2-ctl --list-devices|grep -A1 usb|sed 's/^[[:space:]]*//g'|grep '^/dev'
 ~~~
-Dans mon cas cela donne
+In my case this gives
 <pre>
 /dev/video4
 </pre>
 
 
-Pour connaitre les résolutions et format disponible pour ce périphérique vidéo ici `/dev/video4` (mais cela peut changer chez vous donc commande suivant a adapter au besoin)
+To know the resolutions and formats available for this video device here `/dev/video4` (this may change for you, so adapt the following command as needed)
 ~~~
 v4l2-ctl -d /dev/video4 --list-formats-ext
 ~~~
 <details>
- <summary>Résultat de la commande sur ma machine (Cliquez pour déplier!)</summary>
+ <summary>Command output on my machine (Click to expand!)</summary>
 <pre>
 root@F005-4A88 /root [#] v4l2-ctl -d /dev/video4 --list-formats-ext
 ioctl: VIDIOC_ENUM_FMT
@@ -243,30 +243,30 @@ root@F005-4A88 /root [#]
 
 ---
 
-Telecharger le script https://openk1.org/static/k1/scripts/multi-non-creality-webcams.sh
-( mais là ma commande ne fonctionn pas ... ? http vs https ? , donc j'ai telechargé sur mon PC pour ensuite le transférer en `sftp` au préalable installé via `opkg` ...)
+Download the script https://openk1.org/static/k1/scripts/multi-non-creality-webcams.sh
+(but the command didn't work for me ... ? http vs https? So I downloaded it on my PC and then transferred it via `sftp` previously installed with `opkg` ...)
 ~~~
 wget --no-check-certificate -O- 'https://openk1.org/static/k1/scripts/multi-non-creality-webcams.sh' > /etc/init.d/S50non_creality_webcam
 ~~~
 
-ou copier coller le bloc suivant pour créé un fichier `/etc/init.d/S50non_creality_webcam` adapté pour ma Logitec C170 ( changement de la résolution cf `-r 640x360` )
+or copy and paste the following block to create a `/etc/init.d/S50non_creality_webcam` file adapted for my Logitech C170 (resolution changed with `-r 640x360`)
 ~~~ bash
 cat > /etc/init.d/S50non_creality_webcam<<'===EOF==='
 #!/bin/sh
 # S50non_creality_webcam - by destinal
 # Start up mjpg-streamer on port 8080 for non-creality cameras (where cam_app doesn't autostart)
 
-# Notes PPAC :
-## Source de la version original de ce script :
+# PPAC notes:
+## Original script source:
 # https://openk1.org/static/k1/scripts/multi-non-creality-webcams.sh
-## pré-requis 
-# - le résultat d'un "lsusb" doit avoir une ligne en plus quand on branche la Webcam sur l'un des ports USB du NebulaPad.
-# - installer Entware via le script de Guilouz pour avoir la commande "opkg" cf https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Entware
+## Prerequisites
+# - the result of an "lsusb" must show an additional line when the webcam is plugged into one of the NebulaPad's USB ports.
+# - install Entware via Guilouz's script to have the "opkg" command see https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Entware
 # - opkg install mjpg-streamer
 # - opkg install mjpg-streamer-input-uvc
 # - opkg install mjpg-streamer-output-http
-# - Adapter la resolution cf argument '-r' de mjpg_streamer ( cf "v4l2-ctl --list-devices|grep -A1 usb|sed 's/^[[:space:]]*//g'|grep '^/dev'" et "v4l2-ctl -d /dev/video4 --list-formats-ext" )
-# Fin des notes de PPAC.
+# - Adjust the resolution via the '-r' argument of mjpg_streamer (see "v4l2-ctl --list-devices|grep -A1 usb|sed 's/^[[:space:]]*//g'|grep '^/dev'" and "v4l2-ctl -d /dev/video4 --list-formats-ext")
+# End of PPAC notes.
 
 case "$1" in
   start)
@@ -299,23 +299,23 @@ case "$1" in
 esac
 
 exit $?
-# Fin de mon ficher /etc/init.d/S50non_creality_webcam
+# End of my /etc/init.d/S50non_creality_webcam file
 ===EOF===
 
 ~~~
 
-rendre exécutable le fichier `/etc/init.d/S50non_creality_webcam` fraichement créé
+make the newly created `/etc/init.d/S50non_creality_webcam` file executable
 ~~~
 chmod u+x /etc/init.d/S50non_creality_webcam
 ~~~
 
 
 
-Lancer le sercice `/etc/init.d/S50non_creality_webcam` fraichement créé
+Start the newly created `/etc/init.d/S50non_creality_webcam` service
 ~~~
 /etc/init.d/S50non_creality_webcam restart
 ~~~
-En principe s'il n'y avait pas de flux video déja servi par `/opt/bin/mjpg_streamer`, cela fait un message car la commande `killall mjpg_streamer` ne tue aucun processus. C'est normal.
+If no video stream was already served by `/opt/bin/mjpg_streamer`, this gives a message because the `killall mjpg_streamer` command does not kill any process. That's normal.
 <pre>
 root@F005-4A88 /root [#] /etc/init.d/S50non_creality_webcam restart
 killall: mjpg_streamer: no process killed
@@ -323,29 +323,29 @@ root@F005-4A88 /root [#]
 </pre>
 
 
-Et là normalement l'on devrait obtenir un flux vidéo à l'adresse ( remplacer 192.168.1.23 par l'adresse IP de votre imprimante dans votre réseau local)
+And now you should get a video stream at the address (replace 192.168.1.23 with your printer's IP address on your local network)
 ~~~
 http://192.168.1.23:8080/?action=stream
 ~~~
 
-et sur l’interface web de “Creality Print” :
+and on the “Creality Print” web interface:
 ~~~
 http://192.168.1.23/#/home
 ~~~
 
-et, (seulement si nginx, moonraker et mainsail deja installé ?) 
+and (only if nginx, moonraker and mainsail are already installed?)
 ~~~
 http://192.168.1.23:4409/webcam/?action=stream
 ~~~
 
-Il est normal d'obtenir un genre de message d'erreur a l'url [http://192.168.1.23:8080/](http://192.168.1.23:8080/) car l'on utilise pas l'url complète
+It's normal to get an error message at the URL [http://192.168.1.23:8080/](http://192.168.1.23:8080/) because the full URL isn't used
 <pre>
 501: Not Implemented!
 no www-folder configured
 </pre>
 
 
-Sous l'interface web de mainsail ([http://192.168.1.23:4409](http://192.168.1.23:4409)) si installé, il peut y avoir besoin de créer, ou supprimer et recrééer, une webcam avec la config suivante : 
+Under the mainsail web interface ([http://192.168.1.23:4409](http://192.168.1.23:4409)) if installed, you may need to create, or delete and recreate, a webcam with the following configuration:
  - streaming URL
 ~~~
 http://192.168.1.23:4409/webcam/?action=stream
@@ -359,7 +359,7 @@ http://192.168.1.23:4409/webcam/?action=snapshot
 
 ---
 
-Commandes à utiliser en cas de soucis
+Commands to use in case of issues
 
 ~~~
 v4l2-ctl --all
@@ -369,7 +369,7 @@ v4l2-ctl --all
 ls -la /opt/lib/mjpg-streamer/
 ~~~
 <details>
- <summary>Résultat de la commande sur ma machine (Cliquez pour déplier!)</summary>
+ <summary>Command output on my machine (Click to expand!)</summary>
 <pre>
 root@F005-4A88 /root [#] ls -la /opt/lib/mjpg-streamer/
 total 56
@@ -388,5 +388,5 @@ opkg install v4l-utils
 ---
 
 
-Ressources :
- - Certains messages de l'utilisateur `destinal` sur [https://www.reddit.com/r/Ender3V3KE/](https://www.reddit.com/r/Ender3V3KE/) et sur le serveur Discord [https://discord.gg/d3vil-design](https://discord.gg/d3vil-design)
+Resources:
+ - Some messages from user `destinal` on [https://www.reddit.com/r/Ender3V3KE/](https://www.reddit.com/r/Ender3V3KE/) and on the Discord server [https://discord.gg/d3vil-design](https://discord.gg/d3vil-design)
