@@ -1,78 +1,78 @@
 # CrealityOS - NebulaPad - Ender-3 V3 KE - PPAC_Study
 
-Mes notes sur le firmware v1.1.0.12 (Creality OS) de la Ender-3 V3 KE
+My notes on firmware v1.1.0.12 (Creality OS) of the Ender-3 V3 KE
 
 
 > [!WARNING]
-> **En cours d'élaboration**
+> **Work in progress**
 
 
-> [Reformulation d'un extrait de [https://github.com/fran6p/SonicPad/blob/main/Obico/obico-spad.md](https://github.com/fran6p/SonicPad/blob/main/Obico/obico-spad.md)]  
-> Creality OS, le système d'exploitation (dérivé d'OpenWRT) de Creality n'utilise ni `systemd` pour le lancement de services ni `sudo` pour exécuter des commandes avec les droits root.  
-> De plus les versions de Klipper, Moonraker sont âgées et sont modifiées pour prendre en compte les caractéristiques des matérielles (Tablettes Sonic Pad / Nebula Pad / K1, K1 Max, ...) de Creality.
+> [Rewording of an excerpt from [https://github.com/fran6p/SonicPad/blob/main/Obico/obico-spad.md](https://github.com/fran6p/SonicPad/blob/main/Obico/obico-spad.md)]
+> Creality OS, Creality's operating system (derived from OpenWRT), uses neither `systemd` for service startup nor `sudo` to execute commands with root privileges.
+> In addition, the versions of Klipper and Moonraker are old and modified to take into account the hardware characteristics of Creality devices (Sonic Pad / Nebula Pad / K1, K1 Max, ...).
 
 > [!WARNING]
-> Donc **ne pas mettre a jour moonraker ou Klipper/Klippy et cela même si les interface Fluidd ou Mainsail vous le propose.**
-> Sinon cela risque très fortement de planter la machine et il vous faudra faire un reset de la machine voir faire un recovery du firmware.
+> So **do not update Moonraker or Klipper/Klippy even if the Fluidd or Mainsail interfaces offer to do so.**
+> Otherwise the machine is very likely to crash and you will need to reset the machine or even recover the firmware.
 
 
-- Mon sujet de découverte de la Ender-3 V3 KE sur le forum lesimprimantes3d.fr
+- My discovery topic of the Ender-3 V3 KE on the lesimprimantes3d.fr forum
   - [https://www.lesimprimantes3d.fr/forum/topic/56116-creality-ender-3-v3-ke-la-d%C3%A9couverte-avant-le-test/#comment-572037](https://www.lesimprimantes3d.fr/forum/topic/56116-creality-ender-3-v3-ke-la-d%C3%A9couverte-avant-le-test/#comment-572037)
-- Autre sujets en relation avec le firmware de la Ender-3 V3 KE
+- Other topics related to the Ender-3 V3 KE firmware
   - [https://www.lesimprimantes3d.fr/forum/topic/56971-obico-sur-ender-v3-ke/#comment-578771](https://www.lesimprimantes3d.fr/forum/topic/56971-obico-sur-ender-v3-ke/#comment-578771)
   - [https://www.lesimprimantes3d.fr/forum/topic/57003-boulette-suite-maj-ender-3-v3-ke-firmware-11012-root%C3%A9-plantage-suite-mise-a-jour-de-klipper-via-linterface-fluidd/#comment-579230](https://www.lesimprimantes3d.fr/forum/topic/57003-boulette-suite-maj-ender-3-v3-ke-firmware-11012-root%C3%A9-plantage-suite-mise-a-jour-de-klipper-via-linterface-fluidd/#comment-579230)
 
-## Mot de passe des archives .7z d'export de logs
+## Password for .7z log export archives
 
-Quand on fait un export de logs depuis l'ecran Nebula Pad de la Ender-3 V3 KE, on se retrouve avec une archier .7z protégé par un mot de passe
-exemple de nom d'archive `2023-12-19_12-57-13_creality_log.7z` 
+When you export logs from the Ender-3 V3 KE's Nebula Pad screen, you get a .7z archive protected by a password
+example of archive name `2023-12-19_12-57-13_creality_log.7z`
 
-Voici le mot de passe
+Here is the password
 
 ```
 b[^8xd6fR$w*N&em
 ```
 
-Source https://www.reddit.com/r/Ender3V3KE/comments/1ah6vde/comment/kovd3vb/ (merci a l'utilisateur "slipx06")
+Source https://www.reddit.com/r/Ender3V3KE/comments/1ah6vde/comment/kovd3vb/ (thanks to user "slipx06")
 
-En fait le mot de passe se trouve caché dans le code binaire de `/usr/bin/display-server` mais je ne l'aurais jamais trouvé. ( Pour plus de détails voir https://www.lesimprimantes3d.fr/forum/topic/56116-creality-ender-3-v3-ke-la-d%C3%A9couverte-avant-le-test/?do=findComment&comment=579689 
+In fact the password is hidden in the binary code of `/usr/bin/display-server` but I would never have found it. (For more details see https://www.lesimprimantes3d.fr/forum/topic/56116-creality-ender-3-v3-ke-la-d%C3%A9couverte-avant-le-test/?do=findComment&comment=579689
 )
 
-## Firmware v1.1.0.12 Officiel qui dispose d'un mode root
+## Official firmware v1.1.0.12 that provides a root mode
 
 - [https://github.com/CrealityOfficial/Ender-3_V3_KE_Klipper/releases/tag/V1.1.0.12](https://github.com/CrealityOfficial/Ender-3_V3_KE_Klipper/releases/tag/V1.1.0.12)
 
 
-### Activer le mode root pour pouvoir ensuite se connecter en SSH
+### Activate root mode to then connect via SSH
 
-( reprise de [https://www.lesimprimantes3d.fr/forum/topic/56116-creality-ender-3-v3-ke-la-d%C3%A9couverte-avant-le-test/?do=findComment&comment=576232](https://www.lesimprimantes3d.fr/forum/topic/56116-creality-ender-3-v3-ke-la-d%C3%A9couverte-avant-le-test/?do=findComment&comment=576232) )
+(adapted from [https://www.lesimprimantes3d.fr/forum/topic/56116-creality-ender-3-v3-ke-la-d%C3%A9couverte-avant-le-test/?do=findComment&comment=576232](https://www.lesimprimantes3d.fr/forum/topic/56116-creality-ender-3-v3-ke-la-d%C3%A9couverte-avant-le-test/?do=findComment&comment=576232) )
 
-Pour activer le mode root : 
- * Via l'écran de contrôle (NebulaPad) de l'imprimante cf [https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/blob/main/root%20guide/root%20tutorial.pdf](https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/blob/main/root%20guide/root%20tutorial.pdf)
- * mot de passe par defaut : Creality2023
+To activate root mode :
+ * Via the printer's control screen (NebulaPad) cf [https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/blob/main/root%20guide/root%20tutorial.pdf](https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/blob/main/root%20guide/root%20tutorial.pdf)
+ * default password : Creality2023
 
 
-#### Se connectér en ssh
+#### Connect via ssh
 
 ~~~
 ssh <ip> -l root
 ~~~
-après acception de la clé hôte et saisie du mot de passe root
+after accepting the host key and entering the root password
 ~~~
 //TODO
 ~~~
 
-Ou utiliser par exemple MobaXterm (Windows) ou SnowFlake (linux). (port 22 ( = ssh), utilisateur `root` mote de passe par defaut `Creality2023`)
+Or use for example MobaXterm (Windows) or SnowFlake (linux). (port 22 ( = ssh), user `root` default password `Creality2023`)
 
-( A noter que sftp n'est pas installé par défaut dans CrealityOS, donc dans un premier temps ( sauf aprés avoir installé `entware` qui permet d'avoir de mettre en place le gestionnaire de paquets `opkg` qui permet d'installer `sftp` sur la KE) il ne sera pas posible d'explorer l'arborécence de fichiers mais seulement d'utiliser le mode console ssh. )
+( Note that sftp is not installed by default in CrealityOS, so initially ( unless after having installed `entware` which allows the `opkg` package manager to be set up to install `sftp` on the KE) it will not be possible to explore the file tree but only to use the ssh console mode. )
 
 
 
-( une bonne pratique est de changer le mot de passe root, avec la commande 
+( a good practice is to change the root password, with the command
 ~~~
 passwd
 ~~~
-et de bien noter le nouveau mot de passe pour ne pas le perdre
+and write down the new password so you don't lose it
 )
 
 ---
@@ -81,7 +81,7 @@ et de bien noter le nouveau mot de passe pour ne pas le perdre
 ~~~
 cat /usr/data/creality/userdata/config/system_version.json | jq -r '.sys_version'
 ~~~
-retourne
+returns
 <pre>
 V1.1.0.12
 </pre>
@@ -91,20 +91,20 @@ V1.1.0.12
 ~~~
 df -h | grep /dev/mmcblk0p10 | awk {'print $3 " / " $2 " (" $4 " available)" '}
 ~~~
-retourne un truc de la forme
+returns something like
 <pre>
 2.6G / 5.9G (3.0G available)
 </pre>
 
 
-## Dépôts de références
+## Reference repositories
 
-- Officiel par Creality (Le NebulaPad utilise un firmware basé sur Creality OS)
+- Official from Creality (the NebulaPad uses firmware based on Creality OS)
   - [https://github.com/CrealityOfficial/Ender-3_V3_KE_Klipper](https://github.com/CrealityOfficial/Ender-3_V3_KE_Klipper)
   - [https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex](https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex)
-- Firmware Sonic Pad et/ou les K1 ( basé sur Creality OS )
+- Sonic Pad firmware and/or the K1 (based on Creality OS)
   - [https://github.com/fran6p/SonicPad](https://github.com/fran6p/SonicPad)
-  - [https://github.com/Guilouz/Creality-K1-and-K1-Max](https://github.com/Guilouz/Creality-K1-and-K1-Max)    
+  - [https://github.com/Guilouz/Creality-K1-and-K1-Max](https://github.com/Guilouz/Creality-K1-and-K1-Max)
     - [https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Helper-Script-Installation](https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Helper-Script-Installation)https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Helper-Script-Installation
       - ~~~
         cd && wget --no-check-certificate https://raw.githubusercontent.com/Guilouz/Creality-K1-and-K1-Max/main/Scripts/installer.sh
