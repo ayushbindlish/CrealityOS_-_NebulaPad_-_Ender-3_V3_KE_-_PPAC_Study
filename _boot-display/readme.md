@@ -1,6 +1,7 @@
+# Boot Display
 
-
-
+This document captures the boot display configuration and the layout of image
+files used during startup.
 
 ~~~
 cat /etc/boot-display/boot-display.conf
