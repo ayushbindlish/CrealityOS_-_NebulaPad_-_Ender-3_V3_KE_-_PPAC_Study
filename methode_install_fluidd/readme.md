@@ -1,7 +1,7 @@
 
-##### Installation de fluidd
+##### Fluidd installation
 
-// extrait du [README_en](https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/blob/main/fluidd/README_en) de [https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/tree/main/fluidd](https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/tree/main/fluidd)
+// excerpt from [README_en](https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/blob/main/fluidd/README_en) of [https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/tree/main/fluidd](https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/tree/main/fluidd)
 
 Instruction
 
@@ -34,25 +34,25 @@ Warning: Monnraker running for a long time on the K1 series poses a risk of memo
 ---
 
 
-EN COURS RE REALISATION !
-INCOMPLET et NON fonctionnel.
+WORK IN PROGRESS!
+INCOMPLETE and NOT functional.
 
 
-basé sur [https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/tree/main/fluidd](https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/tree/main/fluidd)
+based on [https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/tree/main/fluidd](https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/tree/main/fluidd)
 
-Attention bien notter que la version de Fluidd est une version "derty" / "sale" ( ce qui veut dire que c'est une version bidouillé par Creality et qu'il n'est pas recommandé de la mettre a jour car sinon on perd les bidouilles de Creality et elle ne sera plus adapté a l'environnement CrealityOS ...)
+Note that the version of Fluidd is a "dirty" version (meaning it's modified by Creality and it's not recommended to update it; otherwise, you lose Creality's tweaks and it will no longer be suited to the CrealityOS environment...)
 
 
-De plus l'archive `fluidd.tar` de `Ender-3_V3_KE_Annex` contient aussi nginx (serveur web) et moonraker (interface d'interaction avec klipper) 
-qui sont elles aussi des versions bidouillées par creality pour fonctionner sur creality OS et avec le Klippy bidouillé de Creality.
+Moreover, the `fluidd.tar` archive from `Ender-3_V3_KE_Annex` also contains nginx (web server) and moonraker (interface to interact with klipper)
+which are also versions modified by Creality to work on Creality OS and with Creality's customized Klippy.
 
-Donc là encore, des versions a ne pas mettre a jour, au risque de planter la machine et d'avoir a faire un reset ou un recovery du firmware.
-
-~~~
+So again, do not update these versions, or you risk crashing the machine and having to reset or recover the firmware.
 
 ~~~
 
-// ??? comme il y a la commande git d'installé par defaut sur CrealityOS, voir si pas plus simple de se faire un dépot github pour chaque composants afin de permetre une installation relativement facilité et une mise a jour ultérieur...
+~~~
+
+// ??? since the git command is installed by default on CrealityOS, maybe it's simpler to create a GitHub repo for each component to allow relatively easy installation and later updates...
 ~~~
 #cd /usr
 #git clone ... /usr/data/...
@@ -64,7 +64,7 @@ Donc là encore, des versions a ne pas mettre a jour, au risque de planter la ma
 ~~~
 
 
-// TODO voir pour un script qui telecharge et déployer le truc sans avoir a passer par la clé USB
+// TODO look for a script that downloads and deploys it without having to use the USB drive
 ~~~
 # wget --no-check-certificate https://raw.githubusercontent.com/CrealityOfficial/Ender-3_V3_KE_Annex/main/fluidd/fluidd/fluidd.tar -O /usr/data/fluidd.tar
 # wget --no-check-certificate https://raw.githubusercontent.com/CrealityOfficial/Ender-3_V3_KE_Annex/main/fluidd/fluidd/fluidd.sh -O /usr/data/fluidd.sh
@@ -73,7 +73,7 @@ Donc là encore, des versions a ne pas mettre a jour, au risque de planter la ma
 
 ~~~
 
-// TODO voir pour une sort de logique de cache sur la clé USB si il y en a une de connecté.
+// TODO consider some kind of cache logic on the USB drive if one is connected.
 ~~~
 ll -R /tmp/udisk/sda1/
 /tmp/udisk/sda1/:
@@ -119,7 +119,7 @@ cp /tmp/udisk/sda1/fluidd/* /usr/data/
 ~~~
 
 
-//TODO voir pour un script de vérififcation
+// TODO look for a verification script
 ~~~
 #
 if [ -d /usr/data/nginx ]; then echo "OK"; else echo "KO"; fi
@@ -158,12 +158,12 @@ Warning: Monnraker running for a long time on the K1 series poses a risk of memo
 
 https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/raw/main/fluidd/fluidd/fluidd.tar
 (
-Si on a deja installé le maisail de Ender-3_V3_KE_Annex, qui embarque/install lui aussi nginx et moonraker,
-on peut uniquement extraire le dossier fluidd de l'archive fluidd.tar car contien le même nginx et fluidd ...)
+If we have already installed the mainsail from Ender-3_V3_KE_Annex, which also includes/install nginx and moonraker,
+we can simply extract the fluidd folder from the fluidd.tar archive because it contains the same nginx and fluidd...)
 ~~~
 tar -C /usr/data -xvf /usr/data/fluidd.tar "fluidd"
 ~~~
-et ne pas utiliser le script d'install car les service moonraker et nginx sont deja installé et lancé.
+and not use the install script because the moonraker and nginx services are already installed and running.
 )
 https://github.com/CrealityOfficial/Ender-3_V3_KE_Annex/blob/main/fluidd/fluidd/fluidd.sh
 ~~~bash
