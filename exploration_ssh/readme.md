@@ -1,23 +1,23 @@
 
-Exploration depuis le promt connecté en ssh utilisateur root
+Exploration from the prompt connected via SSH as root user
 ~~~
 ssh 192.168.1.23 -l
 ~~~
-On se retrouve normalement sur un truc qui resemble à
+You should end up on something that looks like
 <pre>
 root@F005-4A88 /root [#] 
 </pre>
 
-Note : Le nom d'hôte ici "F005-4A88" est la concatenation de "F005" (la Ender-3 V3 SE), du caractère "-", et des quatres dernier caractère de l'adresse MAC de la machine.
+Note: The hostname here "F005-4A88" is the concatenation of "F005" (the Ender-3 V3 SE), the character "-", and the last four characters of the machine's MAC address.
 
 
 ---
 
-info systeme de fichier
+File system info
 ~~~
 mount
 ~~~
-retourne
+returns
 
 <pre>
 root@F005-4A88 /root [#] mount
@@ -37,16 +37,16 @@ overlayfs:/overlay on / type overlay (rw,sync,noatime,lowerdir=/,upperdir=/overl
 root@F005-4A88 /root [#]
 </pre>
 
-Pour mieux comprendre les sytemes de fichiers monté en "overlay" (en gros, une notion de supperposition de partitions. Une dite "lower" (en principe non modifiable) et une dite "upper" (pour les modifications effectuées) pour donner ici en "/" un systeme de fichier modifiable dont la coche "upper", "surcharge"/"masque"/"contient les modification de" la couche "lower" ... ) voir par exemple https://linuxconfig.org/introduction-to-the-overlayfs
+To better understand file systems mounted as "overlay" (basically a layering of partitions: one called "lower" (normally read-only) and one called "upper" (for the changes made) to provide here at "/" a writable file system whose "upper" layer overrides/masks/contains the modifications to the "lower" layer ...) see for example https://linuxconfig.org/introduction-to-the-overlayfs
 
 
 ---
 
-Les "espaces disques" et partitions disponiblent
+Available disk space and partitions
 ~~~
 fdisk -l
 ~~~
-retourne ( ici j'ai la clé USB de connecté ) 
+returns (here I have the USB stick connected)
 <pre>
 root@F005-4A88 /root [#] fdisk -l
 Found valid GPT with protective MBR; using GPT
@@ -93,55 +93,55 @@ root@F005-4A88 /root [#]
 
 
 <details>
- <summary>Si l'on veux faire une image de la partition, cela prend du temps ... (Cliquez pour déplier!)</summary>
+ <summary>If you want to create an image of the partition, it takes time... (Click to expand!)</summary>
 
-Pour créer un fichier image de la partition mmcblk0p9 sur la clé USB (C'est trés long de l'ordre d'une heure ou deux heures car l'on copie tout les block même les block vides de cette partition de 500 MB et la vitesse d'ecriture sur la clé USB fourni est très lente ... )
+To create an image file of partition mmcblk0p9 on the USB stick (this is very slow, around one to two hours, because it copies every block, even the empty ones, of this 500 MB partition and the supplied USB write speed is very slow...)
 
 
-partition de 1 MB avec un lable "ota" (stock ???)
+1 MB partition labeled "ota" (stock ???)
 ~~~
 dd if=/dev/mmcblk0p1 of=/usr/data/dd_mmcblk0p1.img
 ~~~
 
-partition de 1 MB avec un lable "sn_mac" (stock ???)
+1 MB partition labeled "sn_mac" (stock ???)
 ~~~
 dd if=/dev/mmcblk0p2 of=/usr/data/dd_mmcblk0p2.img
 ~~~
 
-partition de 4 MB avec un lable "rtos" (stock ???)
+4 MB partition labeled "rtos" (stock ???)
 ~~~
 dd if=/dev/mmcblk0p3 of=/usr/data/dd_mmcblk0p3.img
 ~~~
 
-partition de 4 MB avec un lable "rtos2" (stock ???)
+4 MB partition labeled "rtos2" (stock ???)
 ~~~
 dd if=/dev/mmcblk0p4 of=/usr/data/dd_mmcblk0p4.img
 ~~~
 
-partition de 500 MB avec un lable "rootfs" (stock ???)
+500 MB partition labeled "rootfs" (stock ???)
 ~~~
 dd if=/dev/mmcblk0p7 of=/usr/data/dd_mmcblk0p7.img
 ~~~
 
-partition de 500 MB avec un lable "rootfs2" (stock ???)
+500 MB partition labeled "rootfs2" (stock ???)
 ~~~
 dd if=/dev/mmcblk0p8 of=/usr/data/dd_mmcblk0p8.img
 ~~~
 
 
-partition de 300 MB avec un lable "rootfs_data" (stoke le upper et work )
+300 MB partition labeled "rootfs_data" (stores the upper and work layers)
 ~~~
 dd if=/dev/mmcblk0p9 of=/tmp/udisk/sda1/dd_mmcblk0p9.img
 ~~~
 
-Pour plus de détails sur l'utilisation de la commande `dd` voir par exemple https://www.tecmint.com/clone-linux-partitions/
+For more details on using the `dd` command see for example https://www.tecmint.com/clone-linux-partitions/
 
 
-Faire une image de la partition dans un fichier sur `/usr/data` (point de montage de la partition mmcblk0p10) prend de l'ordre de 30 minutes.
+Creating an image of the partition into a file on `/usr/data` (mount point of partition mmcblk0p10) takes about 30 minutes.
 ~~~
 dd if=/dev/mmcblk0p9 of=/usr/data/dd_mmcblk0p9.img
 ~~~
-Mais ensuite la copie vers la clé USB prend de l'ordre d'une heure
+But copying it to the USB stick then takes about an hour
 ~~~
 mv -v /usr/data/dd_mmcblk0p9.img /tmp/udisk/sda1/
 ~~~
@@ -156,7 +156,7 @@ mv -v /usr/data/dd_mmcblk0p*.img /tmp/udisk/sda1/
 ~~~
 cat /usr/data/creality/userdata/config/system_version.json
 ~~~
-retourne
+returns
 <pre>
 {
   "sys_version":"V1.1.0.12",
@@ -319,7 +319,7 @@ root@F005-4A88 /root [#]
 
 ---
 
-Normalement on retrouve la valeur du Z-Offset dans le fichier
+Normally the Z-Offset value can be found in the file
 ~~~
 tail /usr/data/printer_data/config/printer.cfg
 ~~~
