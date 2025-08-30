@@ -1,9 +1,8 @@
 
-Pré-requis :
-- Avoir un compte https://octoeverywhere.com/
+Prerequisites:
+- Have an account at https://octoeverywhere.com/
 
-Le plus simple c'est surement de passer par le "Installation Helper Script" de Guilouz [https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Installation-Helper-Script](https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Installation-Helper-Script
-)  
+The easiest way is probably to use Guilouz's "Installation Helper Script" [https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Installation-Helper-Script](https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Installation-Helper-Script)
 
 ~~~
 cd && wget --no-check-certificate https://raw.githubusercontent.com/Guilouz/Creality-K1-and-K1-Max/main/Scripts/installer.sh
@@ -12,7 +11,7 @@ cd && sh ./installer.sh
 
 ---
 
-Sinon en manuel 
+Otherwise, manual installation
 
 ~~~
 cd /usr/data
@@ -21,7 +20,7 @@ cd octoeverywhere
 sh ./install.sh
 ~~~
 <details>
- <summary>Ce qui donne chez moi ... (Cliquez pour déplier!)</summary>
+ <summary>Here's what it looks like for me... (Click to expand!)</summary>
 <pre>
 root@F005-4A88 /root [#] cd /usr/data
 root@F005-4A88 /usr/data [#] git clone https://github.com/QuinnDamerell/OctoPrint-OctoEverywhere.git octoeverywhere
@@ -136,7 +135,7 @@ root@F005-4A88 /usr/data/octoeverywhere [#]
 </pre>
 </details>
 
-Et si tout c'est bien passé vous devrez pouvoir vous connecter via une url de la forme https://nom_de_machine.octoeverywhere.com/#/
+If everything went well, you should be able to connect via a URL like https://machine_name.octoeverywhere.com/#/
 
 <!--
 https://e3v3ke_ppac.octoeverywhere.com/#/
