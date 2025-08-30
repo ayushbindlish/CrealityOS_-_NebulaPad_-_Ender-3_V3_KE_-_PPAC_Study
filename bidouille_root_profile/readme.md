@@ -1,39 +1,39 @@
 
 ---
 
-Pour créer un fichier `/root/.profile` pour avoir lors de l'ouverture d'une session l'espace disque diponible et quelques info en plus
-(`~/.profile` automatiquement executé a l'ouverture d'une session)
+To create a `/root/.profile` file so that at session startup the available disk space and some additional information are displayed
+(`~/.profile` is automatically executed when a session starts)
 ~~~
 cat > /root/.profile<<'===EOF==='
-# Mon fichier ~/.profile automatiquement executé a l'ouverture d'une session
+# My ~/.profile file automatically executed when a session starts
 
-# Afficher l'espace utilisé par les fichiers .gcode et les logs
+# Display the space used by .gcode files and logs
 du -hc /usr/data/printer_data/gcodes/ /usr/data/printer_data/logs/ /usr/data/creality/userdata/log
 echo -e "\n"
 
-# Definition d'alias
+# Alias definitions
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-# les connexion réseaux
+# network connections
 #ifconfig
 #echo -e "\n"
 
-# les ports en ecoute
+# listening ports
 #netstat -tunle
 #echo -e "\n"
 
 ###
-# La suite sont des blocs (eventuellement adapté) de code piqué dans https://github.com/Guilouz/Creality-K1-and-K1-Max/blob/main/Scripts/installer.sh
-# Merci Guilouz !
+# The following blocks (possibly adapted) of code were taken from https://github.com/Guilouz/Creality-K1-and-K1-Max/blob/main/Scripts/installer.sh
+# Thanks Guilouz!
 
 
-# La version de Creality OS
+# The Creality OS version
 echo "CrealityOS `cat /usr/data/creality/userdata/config/system_version.json | jq -r '.sys_version'`"
 
-# Afficher l'espace disque disponible
+# Show available disk space
 df -h | grep /dev/mmcblk0p10 | awk {'print $3 " / " $2 " (" $4 " available)" '}
 
 
@@ -136,8 +136,8 @@ check_version() {
 #    infoline "$(check_folder "$moonraker_folder")" 'Moonraker'
     infoline "$(check_folder "$moonraker_folder")" $moonraker_folder
 
-## Nginx = serveur web, 
-# les ports selon les serveur sont définie dans /usr/data/nginx/nginx/nginx.conf
+  ## Nginx = web server,
+# the ports for the servers are defined in /usr/data/nginx/nginx/nginx.conf
 # cat /usr/data/nginx/nginx/nginx.conf
 #    infoline "$(check_folder "$nginx_folder")" 'Nginx'
     infoline "$(check_folder "$nginx_folder")" $nginx_folder
@@ -152,7 +152,7 @@ check_version() {
 
 #    hr
 
-# Fin de mon ficher ~/.profile
+# End of my ~/.profile file
 ===EOF===
 
 ~~~
