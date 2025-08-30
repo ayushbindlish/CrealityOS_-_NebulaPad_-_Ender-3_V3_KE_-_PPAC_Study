@@ -1,19 +1,19 @@
-# Méthode de reset
+# Reset Method
 
-La méthode de reset des K1* https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Reset-Factory-Settings semble fonctionner pour les Ender-3 V3 KE.
+The K1* reset method https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Reset-Factory-Settings seems to work for the Ender-3 V3 KE.
 
 (
 
-Dommage il semble que l'on doit absolutment avoir la page.html en local pour que cela fonctionne ...
+Too bad it seems we absolutely have to have the page.html locally for it to work...
 
 
-Je me suis permis de mettre la page de reset `Creality_K1_Reset_Utility.html` de Gilouz en ligne via ghithub.io a l'adresse
+I took the liberty of putting Gilouz's reset page `Creality_K1_Reset_Utility.html` online via github.io at the address
 
 https://ppac37.github.io/CrealityOS_-_NebulaPad_-_Ender-3_V3_KE_-_PPAC_Study/methode_reset/Creality_K1_Reset_Utility.html
 
-Pour ne pas avoir a telecharger le [Creality_K1_Reset_Utility.zip](https://github.com/Guilouz/Creality-K1-and-K1-Max/raw/main/Scripts/Creality_K1_Reset_Utility.zip), le décompresser, pour obtenir le `Creality_K1_Reset_Utility.html` qui permet le reset (un script js embarqué envoie un `{"method":"set","params":{"resetSystem":15}}` au web socket port 9999 de l'imprimante).
+So you don't have to download the [Creality_K1_Reset_Utility.zip](https://github.com/Guilouz/Creality-K1-and-K1-Max/raw/main/Scripts/Creality_K1_Reset_Utility.zip), unzip it, to obtain the `Creality_K1_Reset_Utility.html` that performs the reset (an embedded js script sends a `{"method":"set","params":{"resetSystem":15}}` to the printer's web socket on port 9999).
 
-Un grand merci à https://github.com/Guilouz
+A big thank-you to https://github.com/Guilouz
 
 )
 
