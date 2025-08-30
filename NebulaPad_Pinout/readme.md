@@ -5,13 +5,13 @@
 https://www.lesimprimantes3d.fr/forum/topic/56116-creality-ender-3-v3-ke-la-d%C3%A9couverte-avant-le-test/?do=findComment&comment=580697
 -->
 
-Sur le serveur Discord https://discord.gg/d3vil-design 
+On the Discord server https://discord.gg/d3vil-design
 
-j'ai trouvé le pinout du port USB-C (où connecter le g-sensor) sur un NebulaPad
-( mais il me reste a comprendre comment interpréter les "1/2" de la colonne "USB-C" ... ) 
+I found the pinout of the USB-C port (where to connect the g-sensor) on a NebulaPad
+(but I still have to understand how to interpret the "1/2" entries in the "USB-C" column...)
 
 
-https://discord.com/channels/1154500511777693819/1194193938962186301/1194196216649625651 de l'utilisateur "wmvos"
+https://discord.com/channels/1154500511777693819/1194193938962186301/1194196216649625651 from user "wmvos"
 
 > USB-C port on the underside is actually a SPI interface with the following pinout
 > 
@@ -36,10 +36,10 @@ https://discord.com/channels/1154500511777693819/1194193938962186301/11941962166
 
  
 
-et, une photo qui indiquer le pinout d'un g-sensor
-( mais je ne sais pas si c'est standard ou si cela change selon les g-sensors, donc a vérifier )
+and a photo showing the pinout of a g-sensor
+(but I don't know if this is standard or varies between g-sensors, so check before use)
 
-https://discord.com/channels/1154500511777693819/1194193938962186301/1194199344597979256 de l'utilisateur "destinal"
+https://discord.com/channels/1154500511777693819/1194193938962186301/1194199344597979256 from user "destinal"
 <!--
 ADXL345-CR-pinout.webp.fca17e731e4610e1cd5d99d90424d507.webp
 -->
