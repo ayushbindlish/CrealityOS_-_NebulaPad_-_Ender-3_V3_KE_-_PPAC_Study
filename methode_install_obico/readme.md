@@ -1,10 +1,10 @@
-Pour installer Obico
+To install Obico
 
-Il faut savoir que CrealityOS ne fourni pas la commande `bash` et car il se trouve basé sur un linux minimaliste et bidouillé par Creality, cela ne facilite pas les choses.
+Note that CrealityOS does not provide the `bash` command and, since it is based on a minimalist Linux customized by Creality, this doesn't make things easy.
 
-Le plus simple c'est surement de passer par le "Installation Helper Script" de Guilouz [https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Installation-Helper-Script](https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Installation-Helper-Script
-)  
-pour pouvoir faire l'installation de entware [https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Install-Entware](https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Install-Entware) (un pré-requi) et de [https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Obico](https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Obico)
+The simplest approach is probably to use Guilouz's "Installation Helper Script" [https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Installation-Helper-Script](https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Installation-Helper-Script)
+to install Entware [https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Install-Entware](https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Install-Entware) (a prerequisite) and Obico [https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Obico](https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Obico)
+
 
 ~~~
 cd && wget --no-check-certificate https://raw.githubusercontent.com/Guilouz/Creality-K1-and-K1-Max/main/Scripts/installer.sh
@@ -83,27 +83,27 @@ cd && sh ./installer.sh
  Type your choice and validate with Enter: 20
 </pre>
 
-Mais pour l'exercise et afin de mieux comprendre comment cela fonctionne, 
-j'ai préféré étudier le "Installation Helper Script" (donc le fichier `installer.sh` dans sa version v4.4.0 ) de Guilouz pour le faire manuellement.
+But for the exercise and to better understand how it works,
+I preferred to study Guilouz's "Installation Helper Script" (the `installer.sh` file in version v4.4.0) to do it manually.
 
 ---
 
-Pour faire l'équivalent manuellement
+To do the equivalent manually
 
 <!--
 https://www.lesimprimantes3d.fr/forum/topic/56971-obico-sur-ender-v3-ke/?do=findComment&comment=579114
 -->
 
 
-Il y a besoin de la commande `curl` du dépôt de Guilouz (car celle disponible d'origine manque d'options ...)  
-( c'est un pré-requis pour installer entware qui fourni opkg. opkg un genre de gestionnaire de paquet qui est un pré-requis pour installer obico ... )
+We need the `curl` command from Guilouz's repository (because the one available by default lacks options ...)
+(it's a prerequisite for installing Entware which provides `opkg`. `opkg` is a kind of package manager that is a prerequisite for installing Obico ...)
 
 ~~~
 wget -q --no-check-certificate https://raw.githubusercontent.com/Guilouz/Creality-K1-and-K1-Max/main/Scripts/files/fixes/curl -O /tmp/curl >/dev/null 2>&1
 chmod +x /tmp/curl >/dev/null 2>&1 & 
 ~~~
 
-une fois que l'on a curl, Il y a besoins de la commande `opkg` fournis par entware que l'on installe via un script du dépôt de Guilouz
+Once `curl` is available, we need the `opkg` command provided by Entware, installed via a script from Guilouz's repository
 
 ~~~
 rm -rf /opt /usr/data/opt
@@ -113,7 +113,7 @@ wget --no-check-certificate -O - "https://raw.githubusercontent.com/Guilouz/Crea
 ~~~
 
 <details>
- <summary>Ce qui donne chez moi (Cliquez pour déplier!)</summary>
+<summary>Here's what I get on my setup (Click to expand!)</summary>
 <pre>
 Connecting to raw.githubusercontent.com (185.199.109.133:443)
 writing to stdout
@@ -204,7 +204,7 @@ Info: Found a Bug? Please report at https://github.com/Entware/Entware/issues
 </pre>
 </details>
 
-Ne pas faire les "Info: ..." mais 
+Do not follow the "Info: ..." steps but instead
 
 ~~~
 echo 'export PATH="/opt/bin:/opt/sbin:$PATH"' > /etc/profile.d/entware.sh
@@ -213,7 +213,7 @@ chmod 755 /etc/init.d/S50unslung
 /etc/init.d/S50unslung start
 ~~~
 
-Et normalement on a les pré-requis pour passer a l'installation de obico
+And we should now have the prerequisites to proceed with installing Obico
 ~~~
 cd /usr/data
 git clone https://github.com/TheSpaghettiDetective/moonraker-obico.git moonraker-obico
@@ -222,7 +222,7 @@ sh ./scripts/install_creality.sh -k
 ~~~
 
 <details>
- <summary>Ce qui donne mais que j'ai pas terminé ( pas l'app sur mon smartphone ... ) (Cliquez pour déplier!)</summary>
+<summary>Here's what it produced, though I didn't finish (no app on my smartphone...) (Click to expand!)</summary>
 
 <pre>
 root@F005-4A88 /usr/data/moonraker-obico [#] sh ./scripts/install_creality.sh -k
@@ -450,7 +450,7 @@ root@F005-4A88 /usr/data/moonraker-obico [#]
 </pre>
 </details>
 
-Contrairement a ce qui est dit pour reprendre il faudrait plutôt faire 
+Contrary to what is suggested for resuming, you should instead run
 
 ~~~
 cd /usr/data/moonraker-obico
@@ -460,12 +460,12 @@ sh ./scripts/install_creality.sh -k
 ---
 
 
-Histoire de voir le packets installé d'opkg
+Just to see the packages installed by `opkg`
 ~~~
 opkg list-installed
 ~~~
 <details>
- <summary>Se qui donne chez moi (Cliquez pour déplier!)</summary>
+<summary>This is what it shows for me (Click to expand!)</summary>
 <pre>
 root@F005-4A88 /root [#] opkg list-installed
 ca-certificates - 20230311-1
@@ -529,7 +529,7 @@ zoneinfo-europe - 2023c-2
 
 ---
 
-En profiter pour installer `sftp` via `opkg` fournis par Entware ( cf la fin de [https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Install-Entware](https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Install-Entware) )
+Take the opportunity to install `sftp` via `opkg` provided by Entware (see the end of [https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Install-Entware](https://github.com/Guilouz/Creality-K1-and-K1-Max/wiki/Install-Entware))
 ~~~
 opkg install openssh-sftp-server; ln -s /opt/libexec/sftp-server /usr/libexec/sftp-server
 ~~~
