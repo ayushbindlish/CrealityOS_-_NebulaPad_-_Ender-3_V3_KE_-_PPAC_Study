@@ -1,11 +1,11 @@
 
 
-pour que le serveur web serve le fichier `/usr/data/creality/userdata/history/print_history_record.json` via `http://<ip>/downloads/humbnail/historyL.txt`
+To have the web server serve the file `/usr/data/creality/userdata/history/print_history_record.json` via `http://<ip>/downloads/humbnail/historyL.txt`
 
-Creation d'un service pour faire un lien symbolique du fichier que l'on veux rendre dispo par le serveur web pré-installé
+Creating a service to make a symbolic link for the file we want to expose through the pre-installed web server
 
-Bien noter que ici, le lien symbolique doit etre fait apré le lancement du service `/etc/init.d/S99start_app`, qui lance l'application qui générer et maintient a jour le fichier `/usr/data/creality/userdata/history/print_history_record.json`  
-D'où le nom `S99t_hist_http` alphabétiquement aprés `S99start_app` )
+Note that the symbolic link must be created after the `/etc/init.d/S99start_app` service starts, which launches the application that generates and keeps the file `/usr/data/creality/userdata/history/print_history_record.json` up to date.
+Hence the name `S99t_hist_http`, alphabetically after `S99start_app`.)
 
 ~~~
 cat > /etc/init.d/S99t_hist_http<<'===EOF==='
@@ -30,28 +30,28 @@ exit $?
 
 ~~~
 
-Bien noter que le fait, au début, de mettre entre quote la ligne qui permet d'identifier la fin du bloc, evite l'interprétation des caractères spéciaux, et variables. Attention forcement il ne faut pas que le corps du bloc contienne une ligne identique a celle utilisé pour identifier la fin du bloc (ici mise entre quote au début). cf [https://stackoverflow.com/questions/6896025/echo-a-large-chunk-of-text-to-a-file-using-bash](https://stackoverflow.com/questions/6896025/echo-a-large-chunk-of-text-to-a-file-using-bash).
+Note that putting the line identifying the end of the block in quotes at the beginning prevents special characters and variables from being interpreted. Make sure the body of the block does not contain a line identical to the one used to mark the end of the block (quoted at the start here). See [https://stackoverflow.com/questions/6896025/echo-a-large-chunk-of-text-to-a-file-using-bash](https://stackoverflow.com/questions/6896025/echo-a-large-chunk-of-text-to-a-file-using-bash).
 
-rendre executable le fichier créé
+make the created file executable
 ~~~
 chmod a+x /etc/init.d/S99t_hist_http
 ~~~
 
-et enfin 
+and finally
 
-executer le service 
+start the service
 ~~~
 /etc/init.d/S99t_hist_http start
 ~~~
 
-ou relancer/rebooter le système
+or restart/reboot the system
 ~~~
 reboot
 ~~~
 
-(Normalement là, a chaque démarrage, le lien symbolique sera créé par se service. Et donc on retrouve a l'url `http://<ip>/downloads/humbnail/historyL.txt` le contenu de `/usr/data/creality/userdata/history/print_history_record.json` )
+(Normally, at each startup, the symbolic link will be created by this service. Therefore, the content of `/usr/data/creality/userdata/history/print_history_record.json` is available at `http://<ip>/downloads/humbnail/historyL.txt`.)
 
-Chez moi c'est l'adresse [http://192.168.1.23/downloads/humbnail/historyL.txt](http://192.168.1.23/downloads/humbnail/historyL.txt)
+On my machine, it's at [http://192.168.1.23/downloads/humbnail/historyL.txt](http://192.168.1.23/downloads/humbnail/historyL.txt)
 
 
 
